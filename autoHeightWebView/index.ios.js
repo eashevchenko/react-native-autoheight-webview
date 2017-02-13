@@ -64,9 +64,9 @@ export default class AutoHeightWebView extends ImmutableComponent {
             <View style={[{
                 width: ScreenWidth,
                 height: this.state.height + this.props.heightOffset,
-            }, this.props.style]}>
+            }, this.props.outerStyle]}>
                 <WebView
-                    style={{ flex: 1 }}
+                    style={[{ flex: 1 }, this.props.innerStyle]}
                     injectedJavaScript={this.state.script + this.props.customScript}
                     scrollEnabled={false}
                     source={{
@@ -80,22 +80,26 @@ export default class AutoHeightWebView extends ImmutableComponent {
 }
 
 AutoHeightWebView.propTypes = {
-    html: PropTypes.string,
-    onHeightUpdated: PropTypes.func,
-    customScript: PropTypes.string,
+    outerStyle:                   PropTypes.string,
+    innerStyle:                   PropTypes.string,
+    html:                         PropTypes.string,
+    onHeightUpdated:              PropTypes.func,
+    customScript:                 PropTypes.string,
     // offset rn webview margin
-    heightOffset: PropTypes.number,
+    heightOffset:                 PropTypes.number,
     style: View.propTypes.style,
     // add web/files... to project root
-    files: PropTypes.arrayOf(PropTypes.shape({
-        href: PropTypes.string,
-        type: PropTypes.string,
-        rel: PropTypes.string
+    files:                        PropTypes.arrayOf(PropTypes.shape({
+        href:                     PropTypes.string,
+        type:                     PropTypes.string,
+        rel:                      PropTypes.string
     }))
 }
 
 AutoHeightWebView.defaultProps = {
-    heightOffset: 12
+    outerStyle:         '',
+    innerStyle:         '',
+    heightOffset:       12
 }
 
 const ScreenWidth = Dimensions.get('window').width;

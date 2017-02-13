@@ -157,12 +157,12 @@ export default class AutoHeightWebView extends ImmutableComponent {
             <View style={[{
                 width: ScreenWidth,
                 height: this.state.height + this.state.heightOffset
-            }, this.props.style]}>
+            }, this.props.outerStyle]}>
                 {
                     this.state.isChangingSource ? null :
                         <RCTAutoHeightWebView
                             ref={webview => this.webview = webview}
-                            style={{ flex: 1 }}
+                            style={[{ flex: 1 }, this.props.innerStyle]}
                             javaScriptEnabled={true}
                             injectedJavaScript={this.state.script + this.props.customScript}
                             scrollEnabled={false}
@@ -179,24 +179,28 @@ export default class AutoHeightWebView extends ImmutableComponent {
 
 AutoHeightWebView.propTypes = {
     ...WebView.propTypes,
-    html: PropTypes.string,
-    onHeightUpdated: PropTypes.func,
-    customScript: PropTypes.string,
+    html:               PropTypes.string,
+    outerStyle:         PropTypes.string,
+    innerStyle:         PropTypes.string,
+    onHeightUpdated:    PropTypes.func,
+    customScript:       PropTypes.string,
     // offset rn webview margin
-    heightOffset: PropTypes.number,
+    heightOffset:       PropTypes.number,
     // baseUrl not work in android 4.3 or below version
-    enableBaseUrl: PropTypes.bool,
+    enableBaseUrl:      PropTypes.bool,
     // works if set enableBaseUrl to true; add web/files... to android/app/src/assets/
-    files: PropTypes.arrayOf(PropTypes.shape({
-        href: PropTypes.string,
-        type: PropTypes.string,
-        rel: PropTypes.string
+    files:              PropTypes.arrayOf(PropTypes.shape({
+        href:           PropTypes.string,
+        type:           PropTypes.string,
+        rel:            PropTypes.string
     }))
 }
 
 AutoHeightWebView.defaultProps = {
-    enableBaseUrl: false,
-    heightOffset: 20
+    outerStyle:         '',
+    innerStyle:         '',
+    enableBaseUrl:      false,
+    heightOffset:       20
 }
 
 const ScreenWidth = Dimensions.get('window').width;
