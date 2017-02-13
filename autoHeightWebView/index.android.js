@@ -180,8 +180,8 @@ export default class AutoHeightWebView extends ImmutableComponent {
 AutoHeightWebView.propTypes = {
     ...WebView.propTypes,
     html:               PropTypes.string,
-    outerStyle:         PropTypes.string,
-    innerStyle:         PropTypes.string,
+    outerStyle:         PropTypes.object,
+    innerStyle:         PropTypes.object,
     onHeightUpdated:    PropTypes.func,
     customScript:       PropTypes.string,
     // offset rn webview margin
@@ -197,8 +197,8 @@ AutoHeightWebView.propTypes = {
 }
 
 AutoHeightWebView.defaultProps = {
-    outerStyle:         '',
-    innerStyle:         '',
+    outerStyle:         {},
+    innerStyle:         {},
     enableBaseUrl:      false,
     heightOffset:       20
 }

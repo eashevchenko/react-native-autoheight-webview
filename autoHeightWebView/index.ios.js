@@ -80,8 +80,8 @@ export default class AutoHeightWebView extends ImmutableComponent {
 }
 
 AutoHeightWebView.propTypes = {
-    outerStyle:                   PropTypes.string,
-    innerStyle:                   PropTypes.string,
+    outerStyle:                   PropTypes.object,
+    innerStyle:                   PropTypes.object,
     html:                         PropTypes.string,
     onHeightUpdated:              PropTypes.func,
     customScript:                 PropTypes.string,
@@ -97,9 +97,9 @@ AutoHeightWebView.propTypes = {
 }
 
 AutoHeightWebView.defaultProps = {
-    outerStyle:         '',
-    innerStyle:         '',
-    heightOffset:       12
+    outerStyle:         {},
+    innerStyle:         {},
+    heightOffset:       40
 }
 
 const ScreenWidth = Dimensions.get('window').width;
